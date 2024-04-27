@@ -11,6 +11,7 @@ server_only 'yes'
 server_scripts { 
     'server/ErrorsHandler.lua',
     'server/FileManager.lua',
+    'server/DatabaseHandler.lua',
     'server/Exports.lua',
     'server/Demo.lua'
 }

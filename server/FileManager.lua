@@ -52,6 +52,7 @@ local new_FileManager = function()
 
     self.deleteFile = function(name)
         if ErrorsHandler.isFormatCorrect(name, "string") and self.doesFileExist(self.path, name) then
+            -- TODO: Controllare che funzioni os.remove
             os.remove(self.path .. name .. ".json")
             return true
         end

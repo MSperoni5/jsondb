@@ -1,0 +1,35 @@
+[
+    {
+        "primaryKey": "0",
+        "data": [
+            {
+                "id": "char1:0000",
+                "name": "Tizio",
+                "surname": "Caio",
+                "age": 20,
+                "jobs": [ "police", "ambulance" ]
+            },
+            {
+                "id": "char1:0001",
+                "name": "Tizio",
+                "surname": "Caio",
+                "age": 20,
+                "jobs": [ "police", "ambulance" ]
+            },
+            {
+                "id": "char1:0002",
+                "name": "Tizio",
+                "surname": "Caio",
+                "age": 20,
+                "jobs": [ "police", "ambulance" ]
+            },
+            {
+                "id": "char1:0003",
+                "name": "Tizio",
+                "surname": "Caio",
+                "age": 20,
+                "jobs": [ "police", "ambulance" ]
+            }
+        ]
+    }
+]
