@@ -1,4 +1,4 @@
-# jsondb
+# jsondb [NOT FINISHED YET]
 ## Lua script to manage a database using JSON files as a data store.
 Lua script to manage a database using JSON files as a data store. Add, edit, delete and query data in a simple and intuitive way. Perfect for projects that require lightweight and flexible data management.
 
