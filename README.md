@@ -29,9 +29,3 @@ ensure jsondb
 This line ensures that the jsondb resource is started when the server starts.
 
 That's it! The jsondb resource is now installed, and you've added it to your server configuration for automatic startup.
-
-### Updates
-Blank
-
-### TODO
-Blank

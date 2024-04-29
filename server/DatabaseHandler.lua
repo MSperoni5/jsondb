@@ -47,7 +47,7 @@ local new_DatabaseHandler = function()
         if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(conditions, "table") and ErrorsHandler.isFormatCorrect(single, "boolean") then
             -- TODO: Implement as soon as possible
         end
-        return false
+        return nil
     end
 
     self.deleteFromTable = function(name, conditions, single)
