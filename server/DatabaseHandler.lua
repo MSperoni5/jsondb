@@ -1,78 +1,27 @@
 local new_DatabaseHandler = function()
     local self = {}
 
-    -- TODO: SELECTWHERE
-    -- TODO: UPDATEWHERE
-    -- TODO: DELETEWHERE
-
-    self.doesTableFormatCorrectAndExist = function(name)
-        if ErrorsHandler.isFormatCorrect(name, "string") then
-            if FileManager.doesFileExist(name) then
-                return true
-            else
-                ErrorsHandler.error("The table " .. name .. " does not exist.")
-            end
-        end
-        return false
-    end
-
-    -- self.deleteFromTable = function(name, primaryKey, ...)
-    --     -- TODO: ... sono where and value all'infinito quindi where deve essere una parte di table.data e value il valore da confrontare
-    --     if self.doesTableFormatCorrectAndExist(name) then
-    --         local table = FileManager.readFile(name)
-    --         if table then
-    --             if primaryKey then
-    --                 if table.primaryKey and table[primaryKey] then
-    --                     table[primaryKey] = nil
-    --                     FileManager.writeFile(name, table)
-    --                     return true
-    --                 else
-    --                     ErrorsHandler.error("The primary key does not exist.")
-    --                 end
-    --             else
-    --                 -- TODO: Qua fare quello che c'è nel primo todo con ... e confrontare i valori
-    --             end
-    --         else
-    --             ErrorsHandler.error("The table " .. name .. " could not be opened.")
-    --         end
-    --     end
-    --     return false
-    -- end
-
-    self.insertIntoTable = function(name, primaryKey, data)
-        if self.doesTableFormatCorrectAndExist(name) then
-            if data then
-                local table = FileManager.readFile(name)
-                if table then
-                    if table.primaryKey then
-                        if primaryKey then
-                            if not table[primaryKey] then
-                                table[primaryKey] = data
-                                FileManager.writeFile(name, table)
-                                return true
-                            else
-                                ErrorsHandler.error("The primary key already exists.")
-                            end
-                        else
-                            ErrorsHandler.error("The table " .. name .. " requires a primary key.")
-                        end
-                    else
-                        table.insert(table.data, data)
-                        FileManager.writeFile(name, table)
-                        return true
-                    end
+    self.doesTableFormatCorrectAndShouldExist = function(name, shouldExist)
+        if ErrorsHandler.isFormatCorrect(name, "string") and ErrorsHandler.isFormatCorrect(shouldExist, "boolean") then
+            if shouldExist then
+                if FileManager.doesFileExist(name) then
+                    return true
                 else
-                    ErrorsHandler.error("The table " .. name .. " could not be opened.")
+                    ErrorsHandler.error("The table " .. name .. " does not exist.")
                 end
             else
-                ErrorsHandler.error("The data is empty.")
+                if not FileManager.doesFileExist(name) then
+                    return true
+                else
+                    ErrorsHandler.error("The table " .. name .. " already exists.")
+                end
             end
         end
         return false
     end
 
     self.deleteTable = function(name)
-        if self.doesTableFormatCorrectAndExist(name) then
+        if self.doesTableFormatCorrectAndShouldExist(name, true) then
             FileManager.deleteFile(name)
             return true
         end
@@ -80,9 +29,57 @@ local new_DatabaseHandler = function()
     end
         
     self.createTable = function(name, primaryKey)
-        if self.doesTableFormatCorrectAndExist(name) and ErrorsHandler.isFormatCorrect(primaryKey, "boolean") then
+        if self.doesTableFormatCorrectAndShouldExist(name, false) and ErrorsHandler.isFormatCorrect(primaryKey, "boolean") then
             FileManager.createFile(name, { primaryKey = primaryKey, data = {} })
             return true
+        end
+        return false
+    end
+
+    self.updateInTable = function(name, conditions, data, single)
+        if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(conditions, "table") and ErrorsHandler.isFormatCorrect(data, "table") and ErrorsHandler.isFormatCorrect(single, "boolean") then
+            -- TODO: Implement as soon as possible
+        end
+        return false
+    end
+
+    self.selectFromTable = function(name, conditions, single)
+        if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(conditions, "table") and ErrorsHandler.isFormatCorrect(single, "boolean") then
+            -- TODO: Implement as soon as possible
+        end
+        return false
+    end
+
+    self.deleteFromTable = function(name, conditions, single)
+        if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(conditions, "table") and ErrorsHandler.isFormatCorrect(single, "boolean") then
+            -- TODO: Implement as soon as possible
+        end
+        return false
+    end
+
+    self.insertIntoTable = function(name, primaryKey, data)
+        if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(data, "table") then
+            local table = FileManager.readFile(name)
+            if ErrorsHandler.isFormatCorrect(table, "table") then
+                if table.primaryKey then
+                    if primaryKey ~= nil then
+                        primaryKey = tostring(primaryKey)
+                        if table[primaryKey] == nil then
+                            table[primaryKey] = data
+                            FileManager.writeFile(name, table)
+                            return true
+                        else
+                            ErrorsHandler.error("The primary key already exists.")
+                        end
+                    else
+                        ErrorsHandler.error("The table " .. name .. " requires a primary key.")
+                    end
+                else
+                    table.insert(table.data, data)
+                    FileManager.writeFile(name, table)
+                    return true
+                end
+            end
         end
         return false
     end

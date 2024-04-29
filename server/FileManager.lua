@@ -1,6 +1,8 @@
 local new_FileManager = function()
     local self = {}
 
+    -- TODO: Optimise the file manager with the cache system. Use io.open as little as possible
+
     self.path = GetResourcePath(GetCurrentResourceName()) .. "/database/"
 
     self.doesFileExist = function(name)
@@ -9,6 +11,8 @@ local new_FileManager = function()
             if file then
                 io.close(file)
                 return true
+            else
+                ErrorsHandler.error("The file " .. name .. " does not exist.")
             end
         end
         return false
@@ -25,8 +29,6 @@ local new_FileManager = function()
                 else
                     ErrorsHandler.error("The file " .. name .. " could not be opened.")
                 end
-            else
-                ErrorsHandler.error("The file " .. name .. " does not exist.")
             end
         end
         return nil
@@ -43,8 +45,6 @@ local new_FileManager = function()
                 else
                     ErrorsHandler.error("The file " .. name .. " could not be opened.")
                 end
-            else
-                ErrorsHandler.error("The file " .. name .. " does not exist.")
             end
         end
         return false
@@ -52,7 +52,7 @@ local new_FileManager = function()
 
     self.deleteFile = function(name)
         if ErrorsHandler.isFormatCorrect(name, "string") and self.doesFileExist(self.path, name) then
-            -- TODO: Controllare che funzioni os.remove
+            -- TODO: Check that os.remove works
             os.remove(self.path .. name .. ".json")
             return true
         end

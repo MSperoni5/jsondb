@@ -6,8 +6,8 @@ local new_ErrorsHandler = function()
     end
 
     self.isFormatCorrect = function(value, format)
-        if type(value) ~= format then
-            self.error("The value is not in the correct format. Expected: " .. format .. ", received: " .. type(value))
+        if value == nil or type(value) ~= format then
+            self.error("The value is not in the correct format. Expected: " .. format .. ", received: " .. value and type(value) or "nil")
             return false
         end
         return true
