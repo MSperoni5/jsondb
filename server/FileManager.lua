@@ -6,7 +6,7 @@ local new_FileManager = function()
     self.path = GetResourcePath(GetCurrentResourceName()) .. "/database/"
 
     self.doesFileExist = function(name)
-        if ErrorsHandler.isFormatCorrect(name, "string") then
+        if ErrorsHandler.formatIsCorrect(name, "string") then
             local file = io.open(self.path .. name .. ".json", "r")
             if file then
                 io.close(file)
@@ -19,7 +19,7 @@ local new_FileManager = function()
     end
 
     self.readFile = function(name)
-        if ErrorsHandler.isFormatCorrect(name, "string") then
+        if ErrorsHandler.formatIsCorrect(name, "string") then
             if self.doesFileExist(name) then
                 local file = io.open(self.path .. name .. ".json", "r")
                 if file then
@@ -35,7 +35,7 @@ local new_FileManager = function()
     end
 
     self.writeFile = function(name, content)
-        if ErrorsHandler.isFormatCorrect(name, "string") and ErrorsHandler.isFormatCorrect(content, "table") then
+        if ErrorsHandler.formatIsCorrect(name, "string") and ErrorsHandler.formatIsCorrect(content, "table") then
             if self.doesFileExist(name) then
                 local file = io.open(self.path .. name .. ".json", "w")
                 if file then
@@ -51,7 +51,7 @@ local new_FileManager = function()
     end
 
     self.deleteFile = function(name)
-        if ErrorsHandler.isFormatCorrect(name, "string") and self.doesFileExist(self.path, name) then
+        if ErrorsHandler.formatIsCorrect(name, "string") and self.doesFileExist(self.path, name) then
             -- TODO: Check that os.remove works
             os.remove(self.path .. name .. ".json")
             return true
@@ -60,7 +60,7 @@ local new_FileManager = function()
     end
 
     self.createFile = function(name, default)
-        if ErrorsHandler.isFormatCorrect(name, "string") and ErrorsHandler.isFormatCorrect(default, "table") and not self.doesFileExist(self.path, name) then
+        if ErrorsHandler.formatIsCorrect(name, "string") and ErrorsHandler.formatIsCorrect(default, "table") and not self.doesFileExist(self.path, name) then
             local file = io.open(self.path .. name .. ".json", "w")
             if file then
                 file:write(json.encode(default or {}))

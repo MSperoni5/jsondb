@@ -13,5 +13,6 @@ server_scripts {
     'server/FileManager.lua',
     'server/DatabaseHandler.lua',
     'server/Exports.lua',
+    'server/Import.lua',
     'server/Demo.lua'
 }

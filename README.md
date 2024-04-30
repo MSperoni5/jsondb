@@ -1,4 +1,4 @@
-# jsondb [NOT FINISHED YET]
+# jsondb [NOT FINISHED YET] [FIVEM] [REDM]
 ## Lua script to manage a database using JSON files as a data store.
 Lua script to manage a database using JSON files as a data store. Add, edit, delete and query data in a simple and intuitive way. Perfect for projects that require lightweight and flexible data management.
 
@@ -7,7 +7,6 @@ To enhance your database visualization experience, I recommend using the tool [J
 ### Features
 - Easy usage of a simple and fast database.
 - Easily exportable for convenient usage.
-- Alternative to Fivem's key-value pairs (kvp).
 - Open source.
 - Comprehensive documentation and guides to help users get started and make the most of the tool.
 - Regular updates and improvements to ensure compatibility with the latest JSON standards and best practices.

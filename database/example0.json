@@ -1,34 +1,34 @@
 [
     {
-        "primaryKey": "0",
+        "primaryKey": false,
         "data": [
             {
                 "id": "char1:0000",
-                "name": "Tizio",
-                "surname": "Caio",
-                "age": 20,
-                "jobs": [ "police", "ambulance" ]
+                "name": "John",
+                "surname": "Doe",
+                "age": 25,
+                "jobs": ["engineer", "developer"]
             },
             {
                 "id": "char1:0001",
-                "name": "Tizio",
-                "surname": "Caio",
-                "age": 20,
-                "jobs": [ "police", "ambulance" ]
+                "name": "Alice",
+                "surname": "Smith",
+                "age": 30,
+                "jobs": ["doctor"]
             },
             {
                 "id": "char1:0002",
-                "name": "Tizio",
-                "surname": "Caio",
-                "age": 20,
-                "jobs": [ "police", "ambulance" ]
+                "name": "Bob",
+                "surname": "Johnson",
+                "age": 28,
+                "jobs": ["teacher", "chef"]
             },
             {
                 "id": "char1:0003",
-                "name": "Tizio",
-                "surname": "Caio",
-                "age": 20,
-                "jobs": [ "police", "ambulance" ]
+                "name": "Emily",
+                "surname": "Brown",
+                "age": 22,
+                "jobs": ["artist"]
             }
         ]
     }
