@@ -36,27 +36,99 @@ local new_DatabaseHandler = function()
         return false
     end
 
+    -- TODO: Implement caching system when created
     self.updateInTable = function(name, conditions, data, single)
-        if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(conditions, "table") and ErrorsHandler.isFormatCorrect(data, "table") and ErrorsHandler.isFormatCorrect(single, "boolean") then
-            -- TODO: Implement as soon as possible
+        if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(conditions, "table") and not ErrorsHandler.isTableEmpty(conditions) and ErrorsHandler.isFormatCorrect(data, "table") and ErrorsHandler.isFormatCorrect(single, "boolean") then
+            local table = FileManager.readFile(name)
+            if ErrorsHandler.isFormatCorrect(table, "table") then
+                for primaryKey, data in pairs(table.data) do
+                    if table.primaryKey and (conditions["primaryKey"] and (primaryKey == conditions["primaryKey"]) or true) or true then
+                        local found = true
+                        for key, value in pairs(conditions) do
+                            if data[key] ~= value then
+                                found = false
+                                break
+                            end
+                        end
+                        if found then
+                            table.data[primaryKey] = data
+                            if single then
+                                FileManager.writeFile(name, table)
+                                return true
+                            end
+                        end
+                    end
+                end
+                FileManager.writeFile(name, table)
+                return true
+            end
         end
         return false
     end
 
+    -- TODO: Implement caching system when created
     self.selectFromTable = function(name, conditions, single)
-        if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(conditions, "table") and ErrorsHandler.isFormatCorrect(single, "boolean") then
-            -- TODO: Implement as soon as possible
+        if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(conditions, "table") and not ErrorsHandler.isTableEmpty(conditions) and ErrorsHandler.isFormatCorrect(single, "boolean") then
+            local table = FileManager.readFile(name)
+            if ErrorsHandler.isFormatCorrect(table, "table") then
+                local results = {}
+                for primaryKey, data in pairs(table.data) do
+                    if table.primaryKey and (conditions["primaryKey"] and (primaryKey == conditions["primaryKey"]) or true) or true then
+                        local found = true
+                        for key, value in pairs(conditions) do
+                            if data[key] ~= value then
+                                found = false
+                                break
+                            end
+                        end
+                        if found then
+                            if single then
+                                return data
+                            else
+                                table.insert(results, data)
+                            end
+                        end
+                    end
+                end
+                if not ErrorsHandler.isTableEmpty(results) then
+                    return results
+                end
+            end
         end
         return nil
     end
 
+    -- TODO: Implement caching system when created
     self.deleteFromTable = function(name, conditions, single)
-        if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(conditions, "table") and ErrorsHandler.isFormatCorrect(single, "boolean") then
-            -- TODO: Implement as soon as possible
+        if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(conditions, "table") and not ErrorsHandler.isTableEmpty(conditions) and ErrorsHandler.isFormatCorrect(single, "boolean") then
+            local table = FileManager.readFile(name)
+            if ErrorsHandler.isFormatCorrect(table, "table") then
+                for primaryKey, data in pairs(table.data) do
+                    if table.primaryKey and (conditions["primaryKey"] and (primaryKey == conditions["primaryKey"]) or true) or true then
+                        local found = true
+                        for key, value in pairs(conditions) do
+                            if data[key] ~= value then
+                                found = false
+                                break
+                            end
+                        end
+                        if found then
+                            table.data[primaryKey] = nil
+                            if single then
+                                FileManager.writeFile(name, table)
+                                return true
+                            end
+                        end
+                    end
+                end
+                FileManager.writeFile(name, table)
+                return true
+            end
         end
         return false
     end
 
+    -- TODO: Implement caching system when created
     self.insertIntoTable = function(name, primaryKey, data)
         if self.doesTableFormatCorrectAndShouldExist(name, true) and ErrorsHandler.isFormatCorrect(data, "table") then
             local table = FileManager.readFile(name)

@@ -13,6 +13,13 @@ local new_ErrorsHandler = function()
         return true
     end
 
+    self.isTableEmpty = function(table)
+        for _, __ in pairs(table) do
+            return true
+        end
+        return false
+    end
+
     return self
 end
 
