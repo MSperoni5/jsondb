@@ -13,6 +13,18 @@ local new_ErrorsHandler = function()
         return true
     end
 
+    self.getFile = function(path, read)
+        if self.formatIsCorrect(path, "string") and self.formatIsCorrect(read, "boolean") then
+            local file = io.open(path, read and "r" or "w")
+            if file then
+                return file
+            else
+                self.error("The file " .. path .. " could not be opened.")
+            end
+        end
+        return nil
+    end
+
     self.tableIsNotEmpty = function(table)
         for _, __ in pairs(table) do
             return true
