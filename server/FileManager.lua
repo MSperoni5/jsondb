@@ -9,9 +9,9 @@ local new_FileManager = function()
         return self.path .. name .. ".json"
     end
 
-    self.doesFileExist = function(name)
+    self.doesFileExist = function(name, ignoreError)
         if ErrorsHandler.formatIsCorrect(name, "string") then
-            local file = ErrorsHandler.getFile(self.getPath(name), true)
+            local file = ErrorsHandler.getFile(self.getPath(name), true, ignoreError)
             if file ~= nil then
                 io.close(file)
                 return true
@@ -45,7 +45,7 @@ local new_FileManager = function()
     end
 
     self.deleteFile = function(name)
-        if ErrorsHandler.formatIsCorrect(name, "string") and self.doesFileExist(self.path, name) then
+        if ErrorsHandler.formatIsCorrect(name, "string") and self.doesFileExist(name) then
             -- TODO: Check that os.remove works
             os.remove(self.getPath(name))
             return true
@@ -54,8 +54,8 @@ local new_FileManager = function()
     end
 
     self.createFile = function(name, default)
-        if ErrorsHandler.formatIsCorrect(name, "string") and ErrorsHandler.formatIsCorrect(default, "table") and not self.doesFileExist(self.path, name) then
-            local file = ErrorsHandler.getFile(self.getPath(name), false)
+        if ErrorsHandler.formatIsCorrect(name, "string") and ErrorsHandler.formatIsCorrect(default, "table") and not self.doesFileExist(name, true) then
+            local file = ErrorsHandler.getFile(self.getPath(name), false, true)
             if file ~= nil then
                 file:write(json.encode(default or {}))
                 io.close(file)

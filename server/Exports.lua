@@ -5,30 +5,30 @@ local new_Exports = function()
 
     self.createTable = DatabaseHandler.createTable
 
-    self.deleteAllFromTable = function(table, conditions)
-        return DatabaseHandler.deleteFromTable(table, conditions, false)
+    self.deleteAllFromTable = function(dbTable, conditions)
+        return DatabaseHandler.deleteFromTable(dbTable, conditions, false)
     end
 
-    self.deleteSingleFromTable = function(table, conditions)
-        return DatabaseHandler.deleteFromTable(table, conditions, true)
+    self.deleteSingleFromTable = function(dbTable, conditions)
+        return DatabaseHandler.deleteFromTable(dbTable, conditions, true)
     end
 
     self.insertIntoTable = DatabaseHandler.insertIntoTable
     
-    self.updateAllInTable = function(table, conditions, data)
-        return DatabaseHandler.updateInTable(table, conditions, data, false)
+    self.updateAllInTable = function(dbTable, conditions, data)
+        return DatabaseHandler.updateIntoTable(dbTable, conditions, data, false)
     end
 
-    self.updateSingleInTable = function(table, conditions, data)
-        return DatabaseHandler.updateInTable(table, conditions, data, true)
+    self.updateSingleInTable = function(dbTable, conditions, data)
+        return DatabaseHandler.updateIntoTable(dbTable, conditions, data, true)
     end
 
-    self.selectAllFromTable = function(table, conditions)
-        return DatabaseHandler.selectFromTable(table, conditions, false)
+    self.selectAllFromTable = function(dbTable, conditions)
+        return DatabaseHandler.selectFromTable(dbTable, conditions, false)
     end
 
-    self.selectSingleFromTable = function(table, conditions)
-        return DatabaseHandler.selectFromTable(table, conditions, true)
+    self.selectSingleFromTable = function(dbTable, conditions)
+        return DatabaseHandler.selectFromTable(dbTable, conditions, true)
     end
 
     return self
