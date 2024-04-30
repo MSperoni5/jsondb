@@ -10,7 +10,7 @@ local new_DatabaseHandler = function()
                     ErrorsHandler.error("The table " .. name .. " does not exist.")
                 end
             else
-                if not FileManager.doesFileExist(name, true) then
+                if not FileManager.doesFileExist(name) then
                     return true
                 else
                     ErrorsHandler.error("The table " .. name .. " already exists.")
