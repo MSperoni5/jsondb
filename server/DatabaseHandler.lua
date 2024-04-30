@@ -1,6 +1,7 @@
 local new_DatabaseHandler = function()
     local self = {}
 
+    -- TODO: Rewrite in clear form
     self.tableFormatIsCorrectAndShouldExist = function(name, shouldExist)
         if ErrorsHandler.formatIsCorrect(name, "string") and ErrorsHandler.formatIsCorrect(shouldExist, "boolean") then
             if shouldExist then
