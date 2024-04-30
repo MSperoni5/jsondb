@@ -20,6 +20,7 @@ local new_DatabaseHandler = function()
         return false
     end
 
+    -- TODO: Implement caching system when created
     self.deleteTable = function(name)
         if self.tableFormatIsCorrectAndShouldExist(name, true) then
             FileManager.deleteFile(name)
@@ -27,7 +28,8 @@ local new_DatabaseHandler = function()
         end
         return false
     end
-        
+
+    -- TODO: Implement caching system when created
     self.createTable = function(name, primaryKey)
         if self.tableFormatIsCorrectAndShouldExist(name, false) and ErrorsHandler.formatIsCorrect(primaryKey, "boolean") then
             FileManager.createFile(name, { primaryKey = primaryKey, data = {} })

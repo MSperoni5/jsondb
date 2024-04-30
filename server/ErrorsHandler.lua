@@ -12,17 +12,7 @@ local new_ErrorsHandler = function()
         end
         return true
     end
-
-    self.getFile = function(path, read)
-        if self.formatIsCorrect(path, "string") and self.formatIsCorrect(read, "boolean") then
-            local file = io.open(path, read and "r" or "w")
-            if file then
-                return file
-            end
-        end
-        return nil
-    end
-
+    
     self.tableIsNotEmpty = function(dbTable)
         for _, __ in pairs(dbTable) do
             return true

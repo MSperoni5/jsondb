@@ -3,7 +3,13 @@ local new_Exports = function()
 
     self.deleteTable = DatabaseHandler.deleteTable
 
-    self.createTable = DatabaseHandler.createTable
+    self.createTableWithPrimaryKey = function(name)
+        return DatabaseHandler.createTable(name, true)
+    end
+
+    self.createTableWithoutPrimaryKey = function(name)
+        return DatabaseHandler.createTable(name, false)
+    end
 
     self.deleteAllFromTable = function(dbTable, conditions)
         return DatabaseHandler.deleteFromTable(dbTable, conditions, false)
