@@ -10,7 +10,8 @@ version '1.0.0'
 server_only 'yes'
 server_scripts {
     'server/ErrorsHandler.lua',
-    'server/FileManager.lua',
+    'server/CacheHandler.lua',
+    'server/FilesHandler.lua',
     'server/DatabaseHandler.lua',
     'server/Exports.lua',
     'server/Import.lua',
